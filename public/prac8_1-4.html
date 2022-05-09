@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prac 8</title>
+    <meta content="">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <style>.button-success {background: rgb(28, 184, 65);color: white;}</style>
+
+    <script>
+        function pushPost(){
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.open("POST", "/users/addpost", true);
+
+            let title = document.getElementById("title").value;
+            let content = document.getElementById("content").value;
+
+            xhttp.setRequestHeader("Content-type", "application/json");
+
+            xhttp.send(JSON.stringify({"title": title, "content": content}));
+        }
+
+        function showPosts(){
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+
+                    let child = document.createElement("div");
+
+                    let posts = JSON.parse(this.responseText);
+
+                    console.log(posts);
+                    console.log(posts[1]);
+
+                    for(let i = 0; i<posts.length; i++){
+
+                        let post = document.createElement("div");
+                        let title = document.createElement("h2");
+                        let content = document.createElement("p");
+
+                        title.innerText = posts[i].title;
+                        content.innerText = posts[i].content;
+
+                        post.appendChild(title);
+                        post.appendChild(content);
+
+                        document.getElementById("posts").appendChild(post);
+                    }
+
+                    document.getElementById("posts").appendChild(child);
+                }
+            }
+
+            xhttp.open("GET", "users/getposts", true);
+
+            xhttp.send();
+
+        }
+    </script>
+
+  </head>
+  <body>
+
+    <div id="main">
+
+        <h1>My Blog</h1>
+        <hr />
+        <div id="newpost">
+            <h2>Add a post</h2>
+            <form class="pure-form">
+
+                <fieldset class="pure-group">
+                    <input type="text" class="pure-input-1-2" placeholder="Blog post title" id="title">
+                    <textarea class="pure-input-1-2" placeholder="Blog Post Content" id="content"></textarea>
+                </fieldset>
+
+                <button type="button" class="pure-button pure-input-1-2 pure-button-primary" onclick="pushPost()"> make post</button>
+            </form>
+        </div>
+        <hr />
+        <div id="posts">
+            <h2>Current Posts</h2>
+
+            <div id="currentPosts">
+            </div>
+
+            <form class="pure-form">
+                <button type="button" class="pure-button pure-input-1-2 pure-button-primary" onclick="showPosts()">show all posts</button>
+            </form>
+
+        </div>
+
+        <div id="tcs" style="display: none;">
+            <h2>Terms and Conditions</h2>
+            <p>All your base are belong to us.</p>
+            <button class="pure-button button-success">Accept</button>
+        </div>
+
+    </div>
+
+  </body>
+</html>
