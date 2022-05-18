@@ -13,8 +13,6 @@ router.post('*', function(req, res, next){
 
   let contentType = req.body['Content-type'];
 
-  console.log(contentType);
-
   if(contentType == "application/json"){
     next();
   }
@@ -31,8 +29,6 @@ router.post('/addpost', function(req, res, next){
   newPost.content = req.body.content;
 
   posts.push(newPost);
-
-  console.log("Posts: " + posts);
 
   res.send();
 })
