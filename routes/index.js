@@ -54,3 +54,31 @@ router.post('/combine', function(req, res, next){
   res.send(combined);
 
 })
+
+router.get('/cookie', function(req, res, next){
+
+  // console.log(req.cookies['prac3_1'] == NULL);
+
+  // let cookies = JSON.parse(req.cookies);
+
+  // for(let i = 0; i<cookies.length(); i++){
+  //   console.log(cookies[i]);
+  // }
+
+  if('prac3_1' in req.cookies){
+
+    let cookieValue = req.cookies['prac3_1'];
+
+    let newCookie = parseInt(cookieValue);
+    newCookie++;
+
+    res.cookie('prac3_1', '' + newCookie);
+
+  }
+  else{
+    res.cookie('prac3_1', '1');
+    console.log(req.cookies);
+  }
+
+  res.send();
+});
