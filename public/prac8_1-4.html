@@ -28,7 +28,11 @@
             xhttp.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
 
-                    document.getElementById("currentPosts").innerHTML = '';
+                    document.getElementById("posts").innerHTML = `
+                        <h2>Current Posts</h2>
+                        <form class="pure-form">
+                            <button type="button" class="pure-button pure-input-1-2 pure-button-primary" onclick="showPosts()">show all posts</button>
+                        </form>`;
 
                     let child = document.createElement("div");
 
@@ -46,7 +50,7 @@
                         post.appendChild(title);
                         post.appendChild(content);
 
-                        document.getElementById("currentPosts").appendChild(post);
+                        document.getElementById("posts").appendChild(post);
                     }
                 }
             }
@@ -80,14 +84,9 @@
         <hr />
         <div id="posts">
             <h2>Current Posts</h2>
-
             <form class="pure-form">
                 <button type="button" class="pure-button pure-input-1-2 pure-button-primary" onclick="showPosts()">show all posts</button>
             </form>
-
-            <div id="currentPosts">
-            </div>
-
         </div>
 
         <div id="tcs" style="display: none;">

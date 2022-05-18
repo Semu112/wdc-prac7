@@ -35,7 +35,5 @@ router.post('/addpost', function(req, res, next){
 
 router.get('/getposts', function(req, res, next){
 
-  console.log(posts);
-
   res.send(posts);
 })
