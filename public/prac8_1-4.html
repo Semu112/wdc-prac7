@@ -28,12 +28,11 @@
             xhttp.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
 
+                    document.getElementById("currentPosts").innerHTML = '';
+
                     let child = document.createElement("div");
 
                     let posts = JSON.parse(this.responseText);
-
-                    console.log(posts);
-                    console.log(posts[1]);
 
                     for(let i = 0; i<posts.length; i++){
 
@@ -47,10 +46,8 @@
                         post.appendChild(title);
                         post.appendChild(content);
 
-                        document.getElementById("posts").appendChild(post);
+                        document.getElementById("currentPosts").appendChild(post);
                     }
-
-                    document.getElementById("posts").appendChild(child);
                 }
             }
 
@@ -84,12 +81,12 @@
         <div id="posts">
             <h2>Current Posts</h2>
 
-            <div id="currentPosts">
-            </div>
-
             <form class="pure-form">
                 <button type="button" class="pure-button pure-input-1-2 pure-button-primary" onclick="showPosts()">show all posts</button>
             </form>
+
+            <div id="currentPosts">
+            </div>
 
         </div>
 

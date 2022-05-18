@@ -1,12 +1,27 @@
 var express = require('express');
 var router = express.Router();
 
+module.exports = router;
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-module.exports = router;
+router.post('*', function(req, res, next){
+  console.log("POST from a user");
+
+  let contentType = req.body['Content-type'];
+
+  console.log(contentType);
+
+  if(contentType == "application/json"){
+    next();
+  }
+  else{
+    res.sendStatus(412);
+  }
+});
 
 let posts = []
 
@@ -17,7 +32,7 @@ router.post('/addpost', function(req, res, next){
 
   posts.push(newPost);
 
-  console.log(posts);
+  console.log("Posts: " + posts);
 
   res.send();
 })

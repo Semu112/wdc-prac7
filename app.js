@@ -19,6 +19,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+let n = 0;
+
+//Count amount of times functions get alled
+app.use(function(req, res, next){
+
+  n++;
+
+  console.log("Received " + n + " requests");
+
+  next();
+
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
