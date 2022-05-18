@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 router.post('*', function(req, res, next){
   console.log("POST from a user");
 
-  let contentType = req.body['Content-type'];
+  let contentType = req.get('Content-type');
 
   if(contentType == "application/json"){
     next();
