@@ -57,26 +57,17 @@ router.post('/combine', function(req, res, next){
 
 router.get('/cookie', function(req, res, next){
 
-  // console.log(req.cookies['prac3_1'] == NULL);
+  if('task3_1' in req.cookies){
 
-  // let cookies = JSON.parse(req.cookies);
+    let cookieValue = parseInt(req.cookies['task3_1']);
 
-  // for(let i = 0; i<cookies.length(); i++){
-  //   console.log(cookies[i]);
-  // }
+    cookieValue++;
 
-  if('prac3_1' in req.cookies){
-
-    let cookieValue = req.cookies['prac3_1'];
-
-    let newCookie = parseInt(cookieValue);
-    newCookie++;
-
-    res.cookie('prac3_1', '' + newCookie);
+    res.cookie('task3_1', '' + cookieValue);
 
   }
   else{
-    res.cookie('prac3_1', '1');
+    res.cookie('task3_1', '1');
     console.log(req.cookies);
   }
 
